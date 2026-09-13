@@ -1,0 +1,25 @@
+@import "tailwindcss";
+@theme { --font-sans: "Inter", "Segoe UI", Arial, sans-serif; }
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 6.5rem; color-scheme: dark; }
+  body { margin: 0; background: #0b1020; color: #f1f5f9; font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+  ::selection { background: #6366f1; color: white; }
+  :focus-visible { outline: 2px solid #a5b4fc; outline-offset: 5px; }
+  button, a, input, textarea { -webkit-tap-highlight-color: transparent; }
+  button:not(:disabled) { cursor: pointer; }
+}
+@layer components {
+  .shell { @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12; }
+  .section-space { @apply py-16 sm:py-24; }
+  .eyebrow { @apply font-mono text-sm leading-relaxed tracking-widest text-indigo-300; }
+  .nav-link { @apply text-sm text-slate-300 transition-colors hover:text-indigo-200; }
+  .card { @apply rounded-2xl border border-white/10 bg-slate-900/60 transition-colors duration-300 hover:border-indigo-400/35; }
+  .button-primary { @apply inline-flex min-h-12 items-center justify-center gap-3 rounded-lg bg-indigo-500 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-indigo-600; }
+  .button-secondary { @apply inline-flex min-h-12 items-center justify-center gap-3 rounded-lg border border-white/15 bg-white/[0.025] px-5 py-3 text-sm font-medium text-slate-200 transition-colors hover:bg-white/10; }
+  .icon-button { @apply inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-white/10 text-slate-300 transition-colors hover:border-indigo-400/40 hover:bg-indigo-400/10 hover:text-indigo-200; }
+  .field-label { @apply flex flex-col gap-2 text-sm font-medium text-slate-300; }
+  .field { @apply w-full rounded-lg border border-white/15 bg-[#0b1020] px-4 py-3 text-base font-normal text-white placeholder:text-slate-500 focus:border-indigo-400; }
+  .skip-link { @apply fixed top-3 left-3 z-[100] -translate-y-24 rounded-lg bg-indigo-500 p-3 text-white focus:translate-y-0; }
+}
+.hero { background: radial-gradient(ellipse at 80% 25%, rgba(99,102,241,.13), transparent 58%); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }

@@ -1,0 +1,3 @@
+import { skills } from '../data';
+import { Badge, SectionHeading } from './UI';
+export default function Skills() { return <section id="skills" className="border-y border-white/10 bg-white/[0.015]"><div className="shell section-space"><SectionHeading number="02" title="Technical toolkit">Skills & foundations</SectionHeading><div className="grid gap-4 md:grid-cols-2">{skills.map((group, i) => <article key={group.name} className={`card p-6 ${i === skills.length - 1 ? 'md:col-span-2' : ''}`}><h3 className="mb-4 text-base font-medium text-indigo-200">{group.name}</h3><div className="flex flex-wrap gap-2">{group.items.map(item => <Badge key={item}>{item}</Badge>)}</div></article>)}</div></div></section>; }
