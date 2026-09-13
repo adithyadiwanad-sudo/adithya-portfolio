@@ -1,29 +1,30 @@
-# Adithya Diwanad — Developer Portfolio
+Adithya Diwanad — Developer Portfolio
+A modern, responsive single-page portfolio designed for Full-Stack Developer, Software Engineer (SDE), and AI/GenAI Engineer roles. Built with React.js, Vite, and Tailwind CSS (v4).
 
-A modern, responsive single-page portfolio designed for Full-Stack Developer, Software Engineer (SDE), and AI/GenAI Engineer roles. Built with **React.js**, **Vite**, and **Tailwind CSS (v4)**.
+🚀 Quick Start (Local Setup)
+Prerequisites
+Node.js: v22.12+ (or current LTS version)
 
----
+Package Manager: npm
 
-## 🚀 Quick Start (Local Setup)
-
-### Prerequisites
-- **Node.js**: v22.12+ (or current LTS version)
-- **Package Manager**: `npm`
-
-### Installation & Run
-
-```bash
+Installation & Run
+Bash
 # 1. Install project dependencies
 npm install
 
 # 2. Launch the Vite local dev server
 npm run dev
+Open http://localhost:5173 in your browser to view the site locally.
+
+Production Build & Preview
+Bash
 # Build static production bundle to /dist
 npm run build
 
 # Preview the production build locally
 npm run preview
-
+📁 Project Structure
+Plaintext
 ├── public/
 │   ├── Adithya_Diwanad_FullStack_Developer_Resume.pdf
 │   └── profile.jpg
@@ -41,7 +42,6 @@ npm run preview
 │   └── index.css            # Tailwind v4 import & custom styles
 ├── index.html
 └── vite.config.js
-
 🛠️ Tech Stack & Architecture
 Frontend: React.js, Vite
 
@@ -52,7 +52,7 @@ Icons: Lucide React
 Hosting: Configured for 1-click Vercel deployment via GitHub integration
 
 🌐 Deployment to Vercel
-Push your repository to your GitHub account (github.com/adithyadiwanad-sudo/portfolio).
+Push your repository to your GitHub account ([github.com/adithyadiwanad-sudo/portfolio](https://github.com/adithyadiwanad-sudo/portfolio)).
 
 Log in to Vercel and click Add New → Project.
 
