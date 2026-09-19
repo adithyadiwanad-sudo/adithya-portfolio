@@ -57,7 +57,7 @@ export const projects = [
     "status": "In Development"
   },
   {
-    "name": "Plan2Field AI",
+    "name": "SpeakLog AI",
     "subtitle": "Voice-Driven Workflow Automation",
     "category": "AI & AUTOMATION",
     "status": "In Development",
