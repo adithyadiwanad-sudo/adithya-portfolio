@@ -33,6 +33,8 @@ export const socials = [
   }
 ];
 
+// Projects
+
 export const projects = [
   {
     "name": "WanderLust",
