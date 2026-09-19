@@ -10,6 +10,7 @@ export const profile = {
   "imageSourceUrl": "https://drive.google.com/file/d/1ttUoQyfgU1wuIPKhM3zU1d-FnXYyXs02/view?usp=sharing"
 };
 
+// Social Links
 export const socials = [
   {
     "name": "GitHub",
