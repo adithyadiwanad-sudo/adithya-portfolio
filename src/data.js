@@ -72,7 +72,8 @@ export const projects = [
       "Integrated end-to-end Whisper transcription and field extraction, achieving 88% routing accuracy."
     ],
     "github": "https://github.com/adithyadiwanad-sudo/plan2field-ai",
-    "demo": "https://plan2field-ai-4yswnzrrobajvssvdvyadk.streamlit.app/",
+    "demo": null,
+    // "demo": "https://plan2field-ai-4yswnzrrobajvssvdvyadk.streamlit.app/",
     "icon": "audio"
   },
   {
