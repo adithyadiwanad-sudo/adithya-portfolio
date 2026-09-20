@@ -1,5 +1,161 @@
-import { ArrowUpRight, Github } from 'lucide-react';
-import { projects, utilities } from '../data';
-import { Badge, ExternalLink, Icon, ProjectLink, SectionHeading } from './UI';
-function ProjectCard({ project, index }) { return <article className="card group flex h-full flex-col p-6 sm:p-8"><div className="mb-8 flex items-center justify-between"><span className="rounded-xl border border-indigo-400/20 bg-indigo-400/10 p-3 text-indigo-300"><Icon name={project.icon} size={24} /></span><span className="font-mono text-sm text-slate-500">0{index + 1}</span></div><p className="eyebrow text-xs">{project.category}</p><h3 className="mt-3 text-2xl font-semibold leading-tight tracking-tight">{project.name}</h3><p className="mt-2 text-base leading-relaxed text-slate-400">{project.subtitle}</p>{project.status && <span className="mt-4 w-fit rounded-full border border-amber-300/20 bg-amber-300/5 px-3 py-1 text-xs text-amber-200">{project.status}</span>}<ul className="my-6 space-y-3 pl-4 text-base leading-7 text-slate-300 marker:text-indigo-400 list-disc">{project.bullets.map(b => <li key={b}>{b}</li>)}</ul><div className="mt-auto flex flex-wrap gap-2">{project.stack.map(t => <Badge key={t}>{t}</Badge>)}</div><div className="mt-7 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-5"><ProjectLink href={project.github} label="GitHub"/><ProjectLink href={project.demo} label="Demo"/></div></article>; }
-export default function Projects() { return <section id="projects" className="shell section-space"><SectionHeading number="01" title="Featured projects">Selected work</SectionHeading><div className="grid gap-5 md:grid-cols-2">{projects.map((project, index) => <ProjectCard key={project.name} project={project} index={index}/>)}</div><div className="mb-5 mt-14 flex items-center gap-3"><h3 className="text-xl font-semibold">Core utility builds</h3><span className="h-px flex-1 bg-white/10"/></div><div className="grid gap-4 md:grid-cols-3">{utilities.map(item => <ExternalLink key={item.name} href={item.url} className="card group p-6"><div className="mb-5 flex justify-between text-slate-400"><Github size={20} aria-hidden="true"/><ArrowUpRight size={20} aria-hidden="true" className="transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"/></div><h4 className="text-lg font-medium group-hover:text-indigo-200">{item.name}</h4><p className="mt-2 text-base leading-7 text-slate-400">{item.description}</p><span className="sr-only"> — GitHub repository (opens in new tab)</span></ExternalLink>)}</div></section>; }
+import { GitBranch } from "lucide-react";
+import { projects, utilities } from "../data";
+import { Badge, ProjectLink, SectionHeading } from "./UI";
+function ProjectCard({ project, index }) {
+  const pipeline = project.pipeline;
+  return (
+    <article className="project-card">
+      <div className="project-visual">
+        <div className="project-visual-top">
+          <span>SYS_{String(index + 1).padStart(2, "0")}</span>
+          <GitBranch size={16} />
+        </div>
+        <div
+          className="architecture"
+          aria-label={`${project.name} architecture`}
+        >
+          {pipeline.map((step, i) => (
+            <div key={step} className="architecture-step">
+              <span
+                className={`architecture-node ${i === 1 ? "core-node" : ""}`}
+              >
+                <span className="node-index">0{i + 1}</span>
+                {step}
+              </span>
+              {i < pipeline.length - 1 && (
+                <span className="architecture-connector" aria-hidden="true">
+                  ↓
+                </span>
+              )}
+            </div>
+          ))}
+        </div>
+        <span className="visual-caption">INPUT → PROCESS → OUTPUT</span>
+      </div>
+      <div className="project-content">
+        <div className="project-meta">
+          <span className="eyebrow">{project.category}</span>
+          <span
+            className={`project-status ${project.status ? "developing" : ""}`}
+          >
+            <span className="status-dot" />
+            {project.status || "Source available"}
+          </span>
+        </div>
+        <h3>{project.name}</h3>
+        <p className="project-subtitle">{project.subtitle}</p>
+        <ul className="project-bullets">
+          {project.bullets.map((b) => (
+            <li key={b}>
+              {b.split(/(\d+(?:\.\d+)?%)/g).map((part, i) =>
+                /\d%$/.test(part) ? (
+                  <strong className="code-green" key={i}>
+                    {part}
+                  </strong>
+                ) : (
+                  part
+                ),
+              )}
+            </li>
+          ))}
+        </ul>
+        <div className="flex flex-wrap gap-2">
+          {project.stack.map((t) => (
+            <Badge key={t}>{t}</Badge>
+          ))}
+        </div>
+        <div className="project-links">
+          <ProjectLink href={project.github} label="View source" />
+          <ProjectLink href={project.demo} label="Live demo" />
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function MiniProjectCard({ project }) {
+  return (
+    <article className="utility-card">
+      <div className="mini-card-heading">
+        <GitBranch size={18} aria-hidden="true" />
+        <span className="project-date">
+          {project.createdAt ? (
+            <>
+              Created{" "}
+              <time dateTime={project.createdAt}>
+                {new Date(project.createdAt).toLocaleDateString("en-US", {
+                  month: "short",
+                  year: "numeric",
+                  timeZone: "UTC",
+                })}
+              </time>
+            </>
+          ) : (
+            "Creation date unavailable"
+          )}
+        </span>
+      </div>
+      <h4>{project.name}</h4>
+      <p>{project.description || project.bullets?.[0] || project.subtitle}</p>
+      <div className="mini-stack">
+        {project.stack?.length ? (
+          project.stack.map((tech) => <Badge key={tech}>{tech}</Badge>)
+        ) : (
+          <span className="stack-note">Tech stack not listed</span>
+        )}
+      </div>
+      <div className="project-links">
+        <ProjectLink href={project.github || project.url} label="Repository" />
+        <ProjectLink href={project.demo} label="Demo" />
+      </div>
+    </article>
+  );
+}
+
+export default function Projects() {
+  // Explicit content metadata owns the hierarchy; array order does not.
+  const featured = projects
+    .filter((project) => project.featured)
+    .sort((a, b) => a.showcaseOrder - b.showcaseOrder);
+  const mini = [
+    ...projects.filter(
+      (project) => project.name === "Student Performance Predictor",
+    ),
+    ...utilities.filter(
+      (project) => project.name === "Passport Tracking Management",
+    ),
+    ...projects.filter(
+      (project) =>
+        !project.featured && project.name !== "Student Performance Predictor",
+    ),
+    ...utilities.filter(
+      (project) => project.name !== "Passport Tracking Management",
+    ),
+  ];
+  return (
+    <section id="projects" className="shell section-space">
+      <SectionHeading number="01" title="Major showcase projects">
+        Selected systems / {String(featured.length).padStart(2, "0")}
+      </SectionHeading>
+      <div className="project-list">
+        {featured.map((project, index) => (
+          <ProjectCard key={project.name} project={project} index={index} />
+        ))}
+      </div>
+      <div className="utility-heading">
+        <div>
+          <p className="eyebrow">
+            MORE FROM THE WORKBENCH / {String(mini.length).padStart(2, "0")}
+          </p>
+          <h3>Mini / Secondary Projects</h3>
+        </div>
+        <span className="eyebrow">Focused builds. Practical ideas.</span>
+      </div>
+      <div className="utility-grid">
+        {mini.map((project) => (
+          <MiniProjectCard key={project.name} project={project} />
+        ))}
+      </div>
+    </section>
+  );
+}

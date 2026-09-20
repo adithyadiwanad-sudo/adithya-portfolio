@@ -1,4 +1,65 @@
-import { Award, BriefcaseBusiness, GraduationCap } from 'lucide-react';
-import { certifications } from '../data';
-import { ExternalLink, SectionHeading } from './UI';
-export default function Background() { return <section id="background" className="shell section-space"><SectionHeading number="03" title="Experience & education">The foundation</SectionHeading><div className="grid gap-8 lg:grid-cols-2"><div className="space-y-5"><article className="card p-6 sm:p-8"><BriefcaseBusiness className="mb-5 text-indigo-300" aria-hidden="true"/><p className="eyebrow mb-3">Sept 2025 — Oct 2025</p><h3 className="text-xl font-semibold">Frontend Developer Intern</h3><p className="mt-2 text-indigo-200">InLighnX Global Pvt Ltd</p><p className="mt-4 leading-7 text-slate-400">Built responsive dashboard UI components and resolved rendering defects for backend REST API integrations.</p></article><article className="card p-6 sm:p-8"><GraduationCap className="mb-5 text-indigo-300" aria-hidden="true"/><p className="eyebrow mb-3">2023 — 2027</p><h3 className="text-xl font-semibold leading-relaxed">B.E. in Information Science and Engineering</h3><p className="mt-2 text-slate-400">Don Bosco Institute of Technology</p><p className="mt-4 font-mono text-sm text-indigo-200">CGPA: 7.66/10</p></article></div><div className="lg:pl-6"><h3 className="mb-2 flex items-center gap-3 text-xl font-semibold"><Award size={22} className="text-indigo-300" aria-hidden="true"/>Certifications & achievements</h3><ul className="divide-y divide-white/10">{certifications.map((c, i) => <li key={c.name} className="flex gap-5 py-6"><span className="pt-1 font-mono text-sm text-slate-500">0{i + 1}</span><div className="min-w-0"><p className="text-base leading-7 text-slate-300">{c.name}</p>{c.detail && <p className="mt-2 text-sm text-indigo-200">{c.detail}</p>}<ExternalLink href={c.url} aria-label={`View Certificate: ${c.name}`} className="button-secondary mt-4">View Certificate<span aria-hidden="true">↗</span></ExternalLink></div></li>)}</ul></div></div></section>; }
+import { ArrowUpRight, Plus } from "lucide-react";
+import { certifications } from "../data";
+import { ExternalLink, SectionHeading } from "./UI";
+export default function Background() {
+  return (
+    <section id="background" className="shell section-space">
+      <SectionHeading number="03" title="A foundation in building">
+        Experience & education
+      </SectionHeading>
+      <div className="background-grid">
+        <div className="timeline">
+          <article className="milestone">
+            <p className="eyebrow">SEPT 2025 — OCT 2025 / EXPERIENCE</p>
+            <h3>Frontend Developer Intern</h3>
+            <p className="organization">InLighnX Global Pvt Ltd</p>
+            <p>
+              Built responsive dashboard UI components and resolved rendering
+              defects for backend REST API integrations.
+            </p>
+            <div className="flex flex-wrap gap-2 mt-5">
+              <span className="badge">Responsive UI</span>
+              <span className="badge">REST API integration</span>
+            </div>
+          </article>
+          <article className="milestone">
+            <p className="eyebrow">2023 — 2027 / EDUCATION</p>
+            <h3>
+              B.E. Information Science
+              <br />& Engineering
+            </h3>
+            <p className="organization">Don Bosco Institute of Technology</p>
+            <p className="font-mono text-sm">
+              CGPA <span className="code-green">7.66 / 10</span>
+            </p>
+          </article>
+        </div>
+        <div className="certifications">
+          <div className="cert-heading">
+            <h3>Credentials & milestones</h3>
+            <span className="eyebrow">05</span>
+          </div>
+          {certifications.map((c, i) => (
+            <details key={c.name} className="certificate">
+              <summary>
+                <span className="tier-number">0{i + 1}</span>
+                <span>{c.name}</span>
+                <Plus size={16} aria-hidden="true" />
+              </summary>
+              <div className="certificate-detail">
+                {c.detail && <p>{c.detail}</p>}
+                <ExternalLink
+                  href={c.url}
+                  className="text-action"
+                  aria-label={`View Certificate: ${c.name}`}
+                >
+                  View Certificate <ArrowUpRight size={15} />
+                </ExternalLink>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

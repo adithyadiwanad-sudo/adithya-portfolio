@@ -1,7 +1,64 @@
-import { ArrowUpRight, AudioLines, ChartNoAxesCombined, Code2, Github, Layers, Linkedin, Mail } from 'lucide-react';
-const icons = { github: Github, linkedin: Linkedin, code: Code2, mail: Mail, layers: Layers, audio: AudioLines, chart: ChartNoAxesCombined };
-export function Icon({ name, ...props }) { const Component = icons[name] || Code2; return <Component aria-hidden="true" size={20} strokeWidth={1.6} {...props} />; }
-export function ExternalLink({ href, children, className = '', ...props }) { return <a href={href} target="_blank" rel="noopener noreferrer" className={className} {...props}>{children}</a>; }
-export function Badge({ children }) { return <span className="rounded-md border border-white/10 bg-white/[0.035] px-2.5 py-1 text-sm text-slate-300">{children}</span>; }
-export function SectionHeading({ number, title, children }) { return <div className="mb-9 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><p className="eyebrow mb-3">{number} / {children}</p><h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h2></div></div>; }
-export function ProjectLink({ href, label }) { return href ? <ExternalLink href={href} className="inline-flex min-h-11 items-center gap-2 text-sm text-indigo-200 hover:text-white">{label}<ArrowUpRight size={16} aria-hidden="true" /></ExternalLink> : <span className="text-sm text-slate-400">{label} · Coming soon</span>; }
+import {
+  ArrowUpRight,
+  AudioLines,
+  ChartNoAxesCombined,
+  Code2,
+  Github,
+  Layers,
+  Linkedin,
+  Mail,
+} from "lucide-react";
+const icons = {
+  github: Github,
+  linkedin: Linkedin,
+  code: Code2,
+  mail: Mail,
+  layers: Layers,
+  audio: AudioLines,
+  chart: ChartNoAxesCombined,
+};
+export function Icon({ name, ...props }) {
+  const Component = icons[name] || Code2;
+  return (
+    <Component aria-hidden="true" size={20} strokeWidth={1.6} {...props} />
+  );
+}
+export function ExternalLink({ href, children, className = "", ...props }) {
+  return (
+    <a
+      href={href}
+      target={href?.startsWith("mailto:") ? undefined : "_blank"}
+      rel="noopener noreferrer"
+      className={className}
+      {...props}
+    >
+      {children}
+    </a>
+  );
+}
+export function Badge({ children }) {
+  return <span className="badge">{children}</span>;
+}
+export function SectionHeading({ number, title, children }) {
+  return (
+    <div className="section-heading">
+      <div>
+        <p className="eyebrow">
+          {number} / {children}
+        </p>
+        <h2>{title}</h2>
+      </div>
+      <span className="section-heading-line" aria-hidden="true" />
+    </div>
+  );
+}
+export function ProjectLink({ href, label }) {
+  return href ? (
+    <ExternalLink href={href} className="text-action">
+      {label}
+      <ArrowUpRight size={16} aria-hidden="true" />
+    </ExternalLink>
+  ) : (
+    <span className="unavailable">{label} / Not published</span>
+  );
+}

@@ -1,3 +1,46 @@
-import { skills } from '../data';
-import { Badge, SectionHeading } from './UI';
-export default function Skills() { return <section id="skills" className="border-y border-white/10 bg-white/[0.015]"><div className="shell section-space"><SectionHeading number="02" title="Technical toolkit">Skills & foundations</SectionHeading><div className="grid gap-4 md:grid-cols-2">{skills.map((group, i) => <article key={group.name} className={`card p-6 ${i === skills.length - 1 ? 'md:col-span-2' : ''}`}><h3 className="mb-4 text-base font-medium text-indigo-200">{group.name}</h3><div className="flex flex-wrap gap-2">{group.items.map(item => <Badge key={item}>{item}</Badge>)}</div></article>)}</div></div></section>; }
+import { Code2, Monitor, Database, Wrench } from "lucide-react";
+import { skills } from "../data";
+import { SectionHeading } from "./UI";
+import SkillChip from "./SkillChip";
+// Present the existing content as four architectural tiers.
+const tiers = [
+  {
+    name: "Languages & Core",
+    icon: Code2,
+    items: [...skills[0].items, ...skills[1].items],
+  },
+  { name: "Frontend", icon: Monitor, items: skills[2].items },
+  { name: "Backend & Databases", icon: Database, items: skills[3].items },
+  {
+    name: "Developer Tools & AI Integration",
+    icon: Wrench,
+    items: [...skills[4].items, "Whisper", "Scikit-learn", "GenAI workflows"],
+  },
+];
+export default function Skills() {
+  return (
+    <section id="skills" className="section-band">
+      <div className="shell section-space">
+        <SectionHeading number="02" title="The engineering toolkit">
+          From interface to infrastructure
+        </SectionHeading>
+        <div className="skill-tiers">
+          {tiers.map(({ name, icon: TierIcon, items }, i) => (
+            <article className="skill-tier" key={name}>
+              <div className="tier-title">
+                <span className="tier-number">0{i + 1}</span>
+                <TierIcon size={20} aria-hidden="true" />
+                <h3>{name}</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {items.map((item) => (
+                  <SkillChip key={item} name={item} />
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

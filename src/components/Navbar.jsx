@@ -1,27 +1,95 @@
-import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
-import ResumeButton from './ResumeButton';
-const links = [['Projects', '#projects'], ['Skills', '#skills'], ['Background', '#background'], ['Contact', '#contact']];
-
+import { useEffect, useRef, useState } from "react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
+import ResumeButton from "./ResumeButton";
+const links = [
+  ["Projects", "#projects"],
+  ["Skills", "#skills"],
+  ["Background", "#background"],
+  ["Contact", "#contact"],
+];
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("");
+  const toggle = useRef(null);
+  useEffect(() => {
+    // Use viewport height for the reading line, independent of screen width.
+    const sections = [...document.querySelectorAll("main section[id]")];
+    let frame = 0;
+    function update() {
+      frame = 0;
+      const current = sections.filter(section => section.getBoundingClientRect().top <= window.innerHeight * 0.3).at(-1);
+      setActive(current ? `#${current.id}` : "");
+    }
+    function schedule() { if (!frame) frame = requestAnimationFrame(update); }
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, []);
+  useEffect(() => {
+    function escape(event) {
+      if (event.key === "Escape" && open) {
+        setOpen(false);
+        toggle.current?.focus();
+      }
+    }
+    window.addEventListener("keydown", escape);
+    return () => window.removeEventListener("keydown", escape);
+  }, [open]);
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0b1020]/90 backdrop-blur-xl">
-      <nav aria-label="Main navigation" className="shell flex min-h-20 flex-wrap items-center justify-between gap-x-4">
-        <a href="#home" aria-label="Adithya Diwanad — home" className="text-xl font-bold tracking-tight">ad<span className="text-indigo-400">.</span></a>
-        <div className="hidden items-center gap-6 lg:flex">
-          {links.map(([label, href]) => <a key={href} href={href} className="nav-link">{label}</a>)}
+    <header className="site-header">
+      <nav aria-label="Main navigation" className="shell nav-shell">
+        <a
+          href="#home"
+          aria-label="Adithya Diwanad — home"
+          className="wordmark"
+        >
+          ad<span className="code-accent">/</span>
+          <span className="wordmark-caption">ADITHYA DIWANAD</span>
+        </a>
+        <div className="desktop-nav">
+          {links.map(([label, href]) => (
+            <a
+              key={href}
+              href={href}
+              className="nav-link"
+              aria-current={active === href ? "location" : undefined}
+            >
+              {label}
+            </a>
+          ))}
         </div>
-        <div className="hidden lg:block"><ResumeButton /></div>
-        <button type="button" aria-label={open ? 'Close navigation' : 'Open navigation'}
-          aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(!open)}
-          onKeyDown={event => { if (event.key === 'Escape') setOpen(false); }} className="icon-button lg:hidden">
+        <a href="#contact" className="nav-contact">
+          Let's talk <ArrowUpRight size={16} />
+        </a>
+        <button
+          ref={toggle}
+          type="button"
+          aria-label={open ? "Close navigation" : "Open navigation"}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          onClick={() => setOpen(!open)}
+          className="icon-button mobile-toggle"
+        >
           {open ? <X /> : <Menu />}
         </button>
-        <div id="mobile-menu" hidden={!open} onKeyDown={event => { if (event.key === 'Escape') setOpen(false); }}
-          className="w-full border-t border-white/10 pb-4 pt-2 lg:hidden">
-          {links.map(([label, href]) => <a key={href} href={href} onClick={() => setOpen(false)} className="nav-link block py-3">{label}</a>)}
-          <ResumeButton onClick={() => setOpen(false)} className="mt-2" />
+        <div id="mobile-menu" hidden={!open} className="mobile-menu">
+          {links.map(([label, href]) => (
+            <a
+              key={href}
+              href={href}
+              onClick={() => setOpen(false)}
+              aria-current={active === href ? "location" : undefined}
+              className="nav-link"
+            >
+              {label}
+            </a>
+          ))}
+          <ResumeButton onClick={() => setOpen(false)} />
         </div>
       </nav>
     </header>
