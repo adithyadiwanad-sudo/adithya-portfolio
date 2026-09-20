@@ -1,3 +1,4 @@
+import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import ResumeButton from "./ResumeButton";
@@ -8,6 +9,8 @@ const links = [
   ["Contact", "#contact"],
 ];
 export default function Navbar() {
+  const reduced = useReducedMotion();
+  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
   const toggle = useRef(null);
@@ -17,10 +20,18 @@ export default function Navbar() {
     let frame = 0;
     function update() {
       frame = 0;
-      const current = sections.filter(section => section.getBoundingClientRect().top <= window.innerHeight * 0.3).at(-1);
+      setScrolled(window.scrollY > 16);
+      const current = sections
+        .filter(
+          (section) =>
+            section.getBoundingClientRect().top <= window.innerHeight * 0.3,
+        )
+        .at(-1);
       setActive(current ? `#${current.id}` : "");
     }
-    function schedule() { if (!frame) frame = requestAnimationFrame(update); }
+    function schedule() {
+      if (!frame) frame = requestAnimationFrame(update);
+    }
     update();
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule);
@@ -41,7 +52,7 @@ export default function Navbar() {
     return () => window.removeEventListener("keydown", escape);
   }, [open]);
   return (
-    <header className="site-header">
+    <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
       <nav aria-label="Main navigation" className="shell nav-shell">
         <a
           href="#home"
@@ -60,6 +71,18 @@ export default function Navbar() {
               aria-current={active === href ? "location" : undefined}
             >
               {label}
+              {active === href && (
+                <motion.span
+                  aria-hidden="true"
+                  className="active-nav-indicator"
+                  layoutId="desktop-nav-indicator"
+                  transition={
+                    reduced
+                      ? { duration: 0 }
+                      : { type: "spring", stiffness: 380, damping: 32 }
+                  }
+                />
+              )}
             </a>
           ))}
         </div>

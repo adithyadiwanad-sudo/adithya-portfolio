@@ -1,3 +1,4 @@
+import Reveal from "./Reveal";
 import {
   ArrowUpRight,
   AudioLines,
@@ -41,7 +42,7 @@ export function Badge({ children }) {
 }
 export function SectionHeading({ number, title, children }) {
   return (
-    <div className="section-heading">
+    <Reveal className="section-heading">
       <div>
         <p className="eyebrow">
           {number} / {children}
@@ -49,7 +50,7 @@ export function SectionHeading({ number, title, children }) {
         <h2>{title}</h2>
       </div>
       <span className="section-heading-line" aria-hidden="true" />
-    </div>
+    </Reveal>
   );
 }
 export function ProjectLink({ href, label }) {

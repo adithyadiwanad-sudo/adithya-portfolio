@@ -1,3 +1,4 @@
+import Reveal from "./Reveal";
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { profile, socials } from "../data";
@@ -21,7 +22,7 @@ export default function Contact() {
   return (
     <>
       <section id="contact" className="contact-section">
-        <div className="shell section-space grid gap-12 lg:grid-cols-2">
+        <Reveal className="shell section-space grid gap-12 lg:grid-cols-2">
           <div>
             <p className="eyebrow mb-5">04 / Get in touch</p>
             <h2 className="text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
@@ -88,7 +89,7 @@ export default function Contact() {
               {notice}
             </p>
           </form>
-        </div>
+        </Reveal>
       </section>
       <footer className="shell flex flex-col items-start justify-between gap-5 py-8 sm:flex-row sm:items-center">
         <p className="text-sm text-slate-500">

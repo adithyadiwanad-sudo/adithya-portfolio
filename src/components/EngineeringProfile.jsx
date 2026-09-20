@@ -1,3 +1,5 @@
+import MotionCard from "./MotionCard";
+import StatusDot from "./StatusDot";
 import { useState } from "react";
 import { Check, Copy, ArrowUpRight } from "lucide-react";
 import { profile } from "../data";
@@ -14,7 +16,8 @@ export default function EngineeringProfile() {
     }
   }
   return (
-    <aside
+    <MotionCard
+      as="aside"
       className="engineering-profile"
       aria-label="Engineering profile card"
     >
@@ -24,7 +27,7 @@ export default function EngineeringProfile() {
       </div>
       <ProfileAvatar />
       <p className="profile-availability">
-        <span className="status-dot success-dot" />
+        <StatusDot />
         Available for Full-Stack / SDE Roles
       </p>
       <div className="profile-card-copy">
@@ -58,6 +61,6 @@ export default function EngineeringProfile() {
           {notice}
         </p>
       </div>
-    </aside>
+    </MotionCard>
   );
 }

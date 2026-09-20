@@ -1,3 +1,4 @@
+import MotionCard from "./MotionCard";
 import {
   Database,
   Code2,
@@ -65,9 +66,14 @@ const technologies = {
 export default function SkillChip({ name }) {
   const [Logo, color] = technologies[name] || [Braces, "#0284C7"];
   return (
-    <span className="skill-chip" style={{ "--brand-color": color }}>
+    <MotionCard
+      as="span"
+      compact
+      className="skill-chip"
+      style={{ "--brand-color": color }}
+    >
       <Logo size={23} aria-hidden="true" className="skill-logo" />
       <span>{name}</span>
-    </span>
+    </MotionCard>
   );
 }

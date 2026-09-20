@@ -1,3 +1,4 @@
+import Reveal, { RevealGroup, RevealItem } from "./Reveal";
 import { Code2, Monitor, Database, Wrench } from "lucide-react";
 import { skills } from "../data";
 import { SectionHeading } from "./UI";
@@ -27,16 +28,18 @@ export default function Skills() {
         <div className="skill-tiers">
           {tiers.map(({ name, icon: TierIcon, items }, i) => (
             <article className="skill-tier" key={name}>
-              <div className="tier-title">
+              <Reveal className="tier-title">
                 <span className="tier-number">0{i + 1}</span>
                 <TierIcon size={20} aria-hidden="true" />
                 <h3>{name}</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
+              </Reveal>
+              <RevealGroup className="flex flex-wrap gap-2" stagger={0.05}>
                 {items.map((item) => (
-                  <SkillChip key={item} name={item} />
+                  <RevealItem key={item} className="skill-reveal">
+                    <SkillChip name={item} />
+                  </RevealItem>
                 ))}
-              </div>
+              </RevealGroup>
             </article>
           ))}
         </div>
