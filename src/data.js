@@ -59,7 +59,7 @@ export const projects = [
     status: "In Development",
   },
   {
-    name: "Plan2Field AI",
+    name: "SpeakLog AI",
     showcaseOrder: 3,
     featured: true,
     pipeline: ["Voice input", "Whisper + AI", "Structured JSON"],
@@ -83,6 +83,7 @@ export const projects = [
     pipeline: ["Network traffic", "ML classifier", "Threat analysis"],
     subtitle: "AI-Powered Network Intrusion Detection",
     category: "CYBERSECURITY & AI",
+    status: "In Development",
     stack: ["Python", "Scikit-learn", "REST APIs"],
     bullets: [
       "Built an AI pipeline to detect network anomalies and classify malicious traffic threats.",
@@ -137,7 +138,7 @@ export const utilities = [
 export const skills = [
   {
     name: "Languages",
-    items: ["Java (DSA & OOP Focus)", "JavaScript", "Python"],
+    items: ["Java", "JavaScript", "Python"],
   },
   {
     name: "Core CS Fundamentals",
@@ -150,6 +151,7 @@ export const skills = [
       "REST APIs",
       "System Architecture",
       "CRUD Operations",
+      "Software Development Life Cycle (SDLC)",
     ],
   },
   {
@@ -179,7 +181,7 @@ export const skills = [
   },
   {
     name: "Tools & Frameworks",
-    items: ["Git", "GitHub", "VS Code", "Postman", "Kafka", "Docker"],
+    items: ["Git", "GitHub", "VS Code", "Postman", "Kafka"],
   },
 ];
 

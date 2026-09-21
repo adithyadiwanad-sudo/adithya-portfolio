@@ -17,7 +17,6 @@ import {
   SiPython,
   SiTailwindcss,
   SiGit,
-  SiDocker,
   SiJavascript,
   SiHtml5,
   SiBootstrap,
@@ -34,7 +33,7 @@ import {
 // Brand assets are bundled SVGs. Generic CS concepts use semantic icons;
 // SQL is a language, so it uses a database symbol rather than a vendor logo.
 const technologies = {
-  "Java (DSA & OOP Focus)": [FaJava, "#D56619"],
+  Java: [FaJava, "#D56619"],
   JavaScript: [SiJavascript, "#B28A00"],
   Python: [SiPython, "#3776AB"],
   "React.js": [SiReact, "#087EA4"],
@@ -43,7 +42,6 @@ const technologies = {
   MongoDB: [SiMongodb, "#47A248"],
   "Tailwind CSS": [SiTailwindcss, "#06B6D4"],
   Git: [SiGit, "#F05032"],
-  Docker: [SiDocker, "#2496ED"],
   HTML5: [SiHtml5, "#E34F26"],
   CSS3: [FaCss3Alt, "#1572B6"],
   Bootstrap: [SiBootstrap, "#7952B3"],
