@@ -1542,7 +1542,7 @@ footer p {
 .portrait-clip {
   overflow: hidden;
   border-radius: inherit;
-  border: 1px solid #e2e8f0cc;
+  border: 0;
   box-shadow: 0 5px 14px #0f172a10;
 }
 .profile-avatar img {
