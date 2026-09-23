@@ -18,7 +18,11 @@ export default function ProfileAvatar() {
         variants={{ rest: { opacity: 0 }, hover: { opacity: 1 } }}
         transition={{ duration: reduced ? 0 : 0.3 }}
       />
-      <div className="portrait-clip">
+      <motion.div
+        className="portrait-clip"
+        animate={reduced ? { y: 0, rotate: 0 } : { y: [0, -6, 0], rotate: [0, 0.6, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+      >
         {failed ? (
           <a
             href={profile.imageSourceUrl}
@@ -40,12 +44,12 @@ export default function ProfileAvatar() {
             onError={() => setFailed(true)}
             variants={{
               rest: { scale: 1 },
-              hover: { scale: reduced ? 1 : 1.05 },
+              hover: { scale: reduced ? 1 : 1.05, rotate: reduced ? 0 : -1 },
             }}
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
           />
         )}
-      </div>
+      </motion.div>
     </motion.div>
   );
 }

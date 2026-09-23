@@ -1543,7 +1543,8 @@ footer p {
   overflow: hidden;
   border-radius: inherit;
   border: 0;
-  box-shadow: 0 5px 14px #0f172a10;
+  background: transparent;
+  box-shadow: none;
 }
 .profile-avatar img {
   display: block;

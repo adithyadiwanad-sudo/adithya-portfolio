@@ -7,8 +7,8 @@ export const profile = {
   email: "adithyadiwanad@gmail.com",
   resumeUrl: "/Adithya_Diwanad_FullStack_Developer_Resume.pdf",
   resumeFilename: "Adithya_Diwanad_FullStack_Developer_Resume.pdf",
-  imageUrl: "/adithya-portrait.png",
-  imageSourceUrl: "/adithya-portrait.png",
+  imageUrl: "/adithya-portrait-cutout.png",
+  imageSourceUrl: "/adithya-portrait-cutout.png",
 };
 
 // Social Links
