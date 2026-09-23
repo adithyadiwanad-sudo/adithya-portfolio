@@ -43,8 +43,8 @@ export default function ProfileAvatar() {
             fetchPriority="high"
             onError={() => setFailed(true)}
             variants={{
-              rest: { scale: 1 },
-              hover: { scale: reduced ? 1 : 1.05, rotate: reduced ? 0 : -1 },
+              rest: { scaleX: -1, scaleY: 1, rotate: 0 },
+              hover: { scaleX: reduced ? -1 : -1.05, scaleY: reduced ? 1 : 1.05, rotate: reduced ? 0 : 1 },
             }}
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
           />
