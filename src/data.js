@@ -136,7 +136,7 @@ export const utilities = [
 export const skills = [
   {
     name: "Languages",
-    items: ["Java", "JavaScript", "Python"],
+    items: ["Java", "JavaScript", "Python", "TypeScript"],
   },
   {
     name: "Core CS Fundamentals",
@@ -174,6 +174,7 @@ export const skills = [
       "MongoDB",
       "Mongoose",
       "SQL",
+      "PostgreSQL",
       "Spring Boot",
     ],
   },
